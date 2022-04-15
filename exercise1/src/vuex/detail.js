@@ -1,4 +1,4 @@
-import { proDetail } from '@/api'
+import { proDetail ,addCar } from '@/api'
 
 const state = {
       proInfo:{}
@@ -6,7 +6,7 @@ const state = {
 const mutations = {
       PEODETAIL(state,data){
                   state.proInfo = data
-                  console.log("获取的具体商品",data);
+                  // console.log("获取的具体商品",data);
       }
 }
 const actions = {
@@ -16,10 +16,31 @@ const actions = {
           if(result.code ==200){
                 context.commit('PEODETAIL',result.data)
           }
-}     
+}     ,
+// 添加购物车
+ async addCar({commit},{skuId,skuNum}){
+        let result = await  addCar(skuId,skuNum)
+        if(result.code ==200){
+            console.log("添加成功",skuId,skuNum,result)
+
+        }
+ }
 
 }
-const getters = {}
+const getters = {
+      categoryView(state){
+            // 这里返回可能数据还没回来返回为underfind
+            return state.proInfo.categoryView || {}
+      }
+      ,
+      skuInfo(state){  // 产品信息
+            return state.proInfo.skuInfo||{}
+      },
+      spuSaleAttrList(state){  // 售卖属性的简化
+            return state.proInfo.spuSaleAttrList||[]
+      }
+      
+}
 
 export default{
       namespaced:true,

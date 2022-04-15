@@ -1,8 +1,10 @@
 <template>
-  <div class="swiper-container">
+  <div class="swiper-container" ref='detail'>
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="../images/s1.png">
+      <div class="swiper-slide" v-for="(list,index) in skuImageList" :key="list.id">
+        <img :class="{active:isActive == index}" 
+        @click="changeIndex(index)"
+        :src="list.imgUrl">
       </div>
     </div>
     <div class="swiper-button-next"></div>
@@ -14,7 +16,42 @@
 
   import Swiper from 'swiper'
   export default {
+    data() {
+      return {
+        isActive: 3, // 将第n+1个小图设置为active选中状态
+      }
+    },
     name: "ImageList",
+    props:['skuImageList'],
+    methods: {
+      changeIndex(index){
+        this.isActive = index;
+        // 通知 兄弟元素（放大镜）更改对应点击的图片
+        this.$bus.$emit('changeImg',index)
+      }
+    },
+    watch: {
+      skuImageList(newVal,oldVal){
+          this.$nextTick(()=>{
+            new Swiper (this.$refs.detail, {
+            // 如果需要前进后退按钮
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+             slidesPerView : 3, 
+             slidesPerGroup : 3,
+                 centeredSlides:true,//设定为true时，active slide会居中，而不是默认状态下的居左。
+    
+  })     
+
+          })
+
+
+
+      }
+    },
+    
   }
 </script>
 

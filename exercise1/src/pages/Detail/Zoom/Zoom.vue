@@ -1,17 +1,57 @@
 <template>
   <div class="spec-preview">
-    <img src="../images/s1.png" />
-    <div class="event"></div>
+    <!-- 展示的图片 -->
+    <img :src="imgObj.imgUrl" />
+    <!-- 写鼠标移动事件的地方 -->
+    <div class="event" @mousemove="handler"></div>
+    <!-- 放大的图片的展示 -->
     <div class="big">
-      <img src="../images/s1.png" />
+    <img :src="imgObj.imgUrl" ref="big"/>
+
     </div>
-    <div class="mask"></div>
+    <!-- 蒙版 -->
+    <div class="mask" ref="mask"></div>
   </div>
 </template>
 
 <script>
   export default {
     name: "Zoom",
+    data() {
+      return {
+        index:0,// 定义一个下标接受下面轮播传来的点击索引
+      }
+    },
+    props:['skuImageList'],
+    computed: {
+      imgObj(){
+        return this.skuImageList[this.index]||{}
+      }
+    },
+    mounted() {
+      this.$bus.$on('changeImg',index=>{this.index = index})
+    },
+    methods: {
+      handler(e){  // 鼠标在图片区域内移动过触发的回调
+        // console.log(33);
+        let mask = this.$refs.mask
+        let big = this.$refs.big
+        let left = e.offsetX - mask.offsetWidth/2 // 计算蒙版到左侧的边距
+        let top = e.offsetY - mask.offsetHeight/2 // 计算蒙版到顶部的边距
+
+        if(left<=0) left = 0
+        if(left>=mask.offsetWidth) left = mask.offsetWidth
+        if(top<=0) top = 0
+        if(top>=mask.offsetHeight) top = mask.offsetHeight
+        
+        // console.log(left,top);
+        mask.style.left = left + 'px'
+        mask.style.top = top +'px'
+         big.style.left = left* -2 + 'px'
+        big.style.top = top* -2 +'px'
+        // e.offsetX
+      }
+    },
   }
 </script>
 
