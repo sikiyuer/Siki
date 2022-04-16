@@ -6,6 +6,7 @@ Vue.use(Vuex)             // 这里引用vue并直接调用使用vuex，否则�
 import home from './home'
 import search from './search/index'
 import detail from './detail'
+import shopcart from './shopcart'
 
 
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({   //export default 是封装代码，使外部�
             // namespaced:true,
             home,
             search,
-            detail
+            detail,
+            shopcart
       }
 
 })

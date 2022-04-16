@@ -92,23 +92,23 @@ export default {
           // 如果有这个自定义属性则进行跳转
           // console.log(catname);
           if(catname){
-            console.log("是a标签");
+            // console.log("是a标签");
             // 定义跳转的路径和参数
             let location ={ name :'search'} // 定义路径
             let query = { catName : catname } // 解构拿到传递的导航名字
             if(catid1){
-            console.log("是一级导航");
+            // console.log("是一级导航");
             query.catId1 =catid1  // 根据不同的导航自定义属性来决定传递的id
 
             }
             else if(catid2){
-            console.log("是二级级导航");
+            // console.log("是二级级导航");
             query.catId2 =catid2
 
 
             }
             else if(catid3){
-            console.log("是三级导航");
+            // console.log("是三级导航");
             query.catId3 =catid3
 
 
@@ -119,9 +119,9 @@ export default {
             location.query = query;
             // 路由跳转
             if(this.$route.params){  // 如果跳转时有params参数
-            console.log("点击了三级导航");
-            console.log("当前传递的是query参数");
-            console.log("读取的params为输入的==",this.$route.params);
+            // console.log("点击了三级导航");
+            // console.log("当前传递的是query参数");
+            // console.log("读取的params为输入的==",this.$route.params);
 
               location.params = this.$route.params
               this.$router.push(location,()=>{},()=>{})
@@ -132,7 +132,7 @@ export default {
           }
         },
         showList(){
-          console.log(233);
+          // console.log(233);
           this.show = true}
        
       },

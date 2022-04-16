@@ -4,11 +4,27 @@ import Register from '@/pages/Register/index'
 import Home from '@/pages/Home/index'
 import Search from '@/pages/Search/index'
 import Detail from '@/pages/Detail/index'
-
+import AddCartSuccess from '@/pages/AddCartSuccess'
+import ShopCart from '@/pages/ShopCart'
 
 
 export default [
-
+  {
+    name: 'shopcart',
+    path: '/ShopCart',
+    component: ShopCart,
+    meta: {
+      footShow: true
+    }
+  },
+  {
+    name: 'addCartSuccess',
+    path: '/AddCartSuccess',
+    component: AddCartSuccess,
+    meta: {
+      footShow: true
+    }
+  },
   {
     name: 'detail',
     path: '/detail/:proId?',

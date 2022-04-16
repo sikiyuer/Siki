@@ -385,10 +385,20 @@
 
       }
       ,
-      addCar(){  // 加入购物车的回调
+     async  addCar(){  // 加入购物车的回调
         // 1.发送请求将信息添加到服务器 2.成功回调 3.失败回调
-        this.$store.dispatch('detail/addCar',{skuId:this.$route.params.proId,
-          skuNum:this.number})
+        // 判断返回的结果
+        try {
+
+        await this.$store.dispatch('detail/addCar',{skuId:this.$route.params.proId,skuNum:this.number})
+          // 成功进行路由的跳转
+          // 简单的数据通过query传过去，复杂的数据可以选择用会话存储 
+          sessionStorage.setItem('PROINFO',JSON.stringify(this.skuInfo))
+          this.$router.push({name:'addCartSuccess',query:{skuNum:this.number}})
+
+        } catch (error) {
+            alert(error.message)
+        }
       }
     },
     

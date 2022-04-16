@@ -5,7 +5,7 @@ import TypeNav from './components/TypeNav/index'  // 注册全局导航组件
 import Carsouel from './components/Carsouel/index'  // 注册全局轮播组件
 import Pagination from './components/Pagination/index'  // 注册全局分页组件
 import {searchInfo} from '@/api'
-  console.log(searchInfo())
+  // console.log(searchInfo())
 // __引入myMock.js 来让模拟的数据执行一次 
 import '@/mock/myMock'
 // __引入swiper样式
