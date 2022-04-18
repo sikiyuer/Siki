@@ -37,3 +37,16 @@ export const Login = (data) => ajax({url:'/user/passport/login',data,method:"pos
 export const TokenLogin = ()=>ajax({url:"/user/passport/auth/getUserInfo",method:'get'})
 // 退出登录
 export const Logout =()=>ajax({url:'/user/passport/logout',method:'get'})
+// 用户地址信息
+export const Address =()=>ajax({url:'/user/userAddress/auth/findUserAddressList',method:'get'})
+// 商品清单信息/api/order/auth/{page}/{limit}
+export const OrderInfo =()=>ajax({url:'/order/auth/trade',method:'get'})
+
+// 这里开始不再使用vuex
+// 提交订单
+export const SubmitOrder =(tradeNo,data)=>ajax({url: `/order/auth/submitOrder?tradeNo=${tradeNo}`,data,method:'post'})
+// 获取订单支付信息
+export const PayOrder = (orderId) =>ajax({url:`/payment/weixin/createNative/${orderId}`,method:'get'})
+// 查询订单支付状态/api/payment/weixin/queryPayStatus/{orderId}
+export const PayState = (orderId) =>ajax({url:`/payment/weixin/queryPayStatus/${orderId}`,method:'get'})
+

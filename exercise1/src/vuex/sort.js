@@ -8,6 +8,7 @@ import search from './search/index'
 import detail from './detail'
 import shopcart from './shopcart'
 import user from './user'
+import trade from './trade'
 
 
 
@@ -17,7 +18,7 @@ export default new Vuex.Store({   //export default 是封装代码，使外部�
             home,
             search,
             detail,
-            shopcart,user
+            shopcart,user,trade
       }
 
 })

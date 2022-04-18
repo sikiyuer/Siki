@@ -59,7 +59,7 @@ async login({commit},user){ // 用户登录
 async tokenLogin({commit}){  // 登录成功通过token获取用户数据
      let result = await TokenLogin()
      if(result.code==200){
-      alert('当前页面无用户信息。重新获取')
+      // alert('当前页面无用户信息。重新获取')
            commit('TOKENLOGIN',result.data)
            return '获取数据成功'
      }
