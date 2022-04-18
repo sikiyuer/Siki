@@ -47,7 +47,8 @@ export default [
   },
   {
     name: 'search',
-    path: '/search:keyword?',   // 占位符 
+    // path: '/search:keyword?',   // 占位符 
+    path: '/search/:keyword?',   // 占位符 
     component: Search,
     meta: {
       footShow: true

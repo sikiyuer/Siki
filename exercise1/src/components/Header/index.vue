@@ -5,13 +5,22 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if='!userName'>
             <span>请</span>
             <router-link to="login">登录</router-link>
-            <router-link to="register" href="###" class="register"
+            <router-link to="register" class="register"
               >免费注册</router-link
             >
           </p>
+
+          <p v-if='userName'>
+            <router-link to="login">登录名{{userName}}</router-link>
+            <a to="register" @click="logout" >退出登录</a
+            >
+          </p>
+
+
+
         </div>
         <div class="typeList">
           <a href="###">我的订单</a>
@@ -33,7 +42,7 @@
         </router-link>
       </h1>
       <div class="searchArea">
-        <form action="###" class="searchForm">
+        <form  class="searchForm">
           <input
             type="text"
             id="autocomplete"
@@ -62,6 +71,11 @@ export default {
       isCommit: false,
     };
   },
+  computed: {
+    userName(){
+      return this.$store.state.user.userInfo.loginName
+    },
+  },
   // watch: { $route (to, from) { this.$router.go(0) } },
   methods: {
     
@@ -72,9 +86,8 @@ export default {
         // this.$router.push("/search/"+ this.searchW ord +"?myquery="+this.searchWord) // 直接传递param和query参数
 
         if(this.$route.query){
-
           // 点击搜索
-          let location = { name: "search", params: {keyword: this.searchWord}};
+          let location = { name: "search", params: {keyword: this.searchWord||undefined}};
           location.query = this.$route.query
            this.$router.push(location)
 
@@ -105,6 +118,14 @@ export default {
 
         // },()=>{},()=>{})
     },
+   async  logout(){ // 退出登录
+    try {
+      await  this.$store.dispatch('user/logout')
+      this.$router.replace('/home')
+    } catch (error) {
+        alert(error.message)
+    }
+    }
   },
   mounted() { // 挂载时就开始监听全局事件总线
     this.$bus.$on('clear',()=>{

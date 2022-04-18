@@ -13,9 +13,13 @@ const Request = axios.create({
   //设置请求拦截器，在发送请求之前进行检查，在发送之前进行一些操作
   Request.interceptors.request.use((config)=>{
         // config配置对象，里面有一个很重要的属性 headers请求头
-      if(store.state.detail.uuid_token){ // 如果仓库里面有 uuid
-            // 请求头添加一个字段，和后台商量好的
+        if(store.state.detail.uuid_token){ // 如果仓库里面有 uuid
+            // 请求头添加一个字段，和后台商量好的 作为临时游客id
             config.headers.userTempId = store.state.detail.uuid_token
+      }
+      if(store.state.user.token){ // 如果仓库里面有 token(登录成功服务器下发)
+            // 请求头带上登录的token
+            config.headers.token = store.state.user.token
       }
         nprogress.start()
         return config

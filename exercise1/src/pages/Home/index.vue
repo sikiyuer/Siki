@@ -25,8 +25,9 @@ import {mapState} from 'vuex'
 export default {
   name:'SikiHome',
   components:{List,Recommend,Rank,Like,Floor,Brond},
-   mounted() {
+ mounted() {
         this.$store.dispatch("home/getFloor")
+      
   }, 
   computed: {
       ...mapState('home',{floors:"floorList"})

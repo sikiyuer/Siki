@@ -123,7 +123,7 @@ export default {
             // console.log("当前传递的是query参数");
             // console.log("读取的params为输入的==",this.$route.params);
 
-              location.params = this.$route.params
+              location.params = this.$route.params||''
               this.$router.push(location,()=>{},()=>{})
             }
           //  this.$router.push({
