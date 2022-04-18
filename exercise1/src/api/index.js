@@ -49,4 +49,6 @@ export const SubmitOrder =(tradeNo,data)=>ajax({url: `/order/auth/submitOrder?tr
 export const PayOrder = (orderId) =>ajax({url:`/payment/weixin/createNative/${orderId}`,method:'get'})
 // 查询订单支付状态/api/payment/weixin/queryPayStatus/{orderId}
 export const PayState = (orderId) =>ajax({url:`/payment/weixin/queryPayStatus/${orderId}`,method:'get'})
+// 获取我的订单
+export const MyOrder = (page,limit) =>ajax({url:`/order/auth/${page}/${limit}`,method:'get'})
 
