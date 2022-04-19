@@ -22,7 +22,7 @@ rou.beforeEach( async (to, from, next) => {
       let username = Store.state.user.userInfo.name // 获取仓库存储的登录用户信息，不能直接用userInfo这个对象判断，始终为真
       let isLogin = Store.state.user.token // 获取仓库token判断是否登录
       next()
-      if(isLogin){   // 如果登录成功
+      if(isLogin){ //如果登录成功
             if(to.path == '/login'){ // 如果要去登录页面
                   next('/home')
             }
@@ -47,8 +47,11 @@ rou.beforeEach( async (to, from, next) => {
                   }
             }
       }
-      else{   // 如果未登录
-            next()
+      else{        // 如果未登录 不能去订单，个人中心等交易和支付相关的页面
+            let toPath = to.path
+           if(toPath=='/trade'||toPath.indexOf('/pay')!=-1||toPath.indexOf('/center')!=-1){
+            next('/login?redirect='+toPath) // 把未登录时点击想去的地方存入query,登录成功再跳过去
+           }
       }
 
 });

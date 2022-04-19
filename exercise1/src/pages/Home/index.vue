@@ -1,5 +1,5 @@
 <template>
-  <div class="">这是主页
+  <div class="">
   <!-- 导航分类 -->
   <NavAll></NavAll>
 <List></List>

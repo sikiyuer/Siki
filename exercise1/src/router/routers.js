@@ -1,25 +1,12 @@
 /* ************************************一级路由组件 */
-import Login from '@/pages/Login/index'
-import Register from '@/pages/Register/index'
-import Home from '@/pages/Home/index'
-import Search from '@/pages/Search/index'
-import Detail from '@/pages/Detail/index'
-import AddCartSuccess from '@/pages/AddCartSuccess'
-import ShopCart from '@/pages/ShopCart' // 购物车
-import Trade from '@/pages/Trade'  //商品结算模块
-import Pay from '@/pages/Pay'  //支付模块
-import Paysuccess from '@/pages/PaySuccess'  //支付成功模块
-import Center from '@/pages/Center'  //个人中心模块
-/* ************************************二级路由组件 */
-import MyOrder from '@/pages/Center/MyOrder'  //个人订单
-import AllOrder from '@/pages/Center/AllOrder'  //团购订单
+
 
 
 export default [
   {
     name: 'center',
     path: '/center',
-    component: Center,
+    component: ()=>import('@/pages/Center'),
     meta: {
       footShow: true
     },
@@ -31,43 +18,60 @@ export default [
       {
         path:'myorder',
         name:'myorder',
-        component:MyOrder
+    component: ()=>import('@/pages/Center/MyOrder'),
+
       },
       {
         path:'allorder',
         name:'allorder',
-        component:AllOrder
+    component: ()=>import('@/pages/Center/AllOrder'),
+
       }
     ]
   },
   {
     name: 'paysuccess',
     path: '/paysuccess',
-    component: Paysuccess,
+    component: ()=>import('@/pages/PaySuccess'),
+
     meta: {
       footShow: true
-    }
+    }// 为了练习 写在组件守卫 了
   },
   {
     name: 'pay',
     path: '/pay',
-    component: Pay,
+    component: ()=>import('@/pages/Pay'),
+
     meta: {
       footShow: true
+    },
+    beforeEnter: (to, from, next) => {
+      if(from.path=='/trade'){next()}
+      else{next(false)}
     }
   },
   {
     name: 'trade',
     path: '/trade',
-    component: Trade,
+    component: ()=>import('@/pages/Trade'),
+    
     meta: {
       footShow: true
+    },
+    // 路由独享守卫 进入trade之前进行判断
+    beforeEnter: (to, from, next) => { // 进入之前
+      // ...
+      if(from.path=='/shopcart'){next()}
+      else{next(false)} // 停留在来之前的页面
+
     }
   },
   {
     name: 'shopcart',
     path: '/ShopCart',
-    component: ShopCart,
+    component: ()=>import('@/pages/ShopCart'),
+
     meta: {
       footShow: true
     }
@@ -75,7 +79,8 @@ export default [
   {
     name: 'addCartSuccess',
     path: '/AddCartSuccess',
-    component: AddCartSuccess,
+    component: ()=>import('@/pages/AddCartSuccess'),
+
     meta: {
       footShow: true
     }
@@ -83,14 +88,16 @@ export default [
   {
     name: 'detail',
     path: '/detail/:proId?',
-    component: Detail,
+    component: ()=>import('@/pages/Detail'),
+
     meta: {
       footShow: true
     }
   }, {
     name: 'home',
     path: '/home',
-    component: Home,
+    component: ()=>import('@/pages/Home'),
+
     meta: {
       footShow: true
     }
@@ -98,13 +105,14 @@ export default [
   {
     name: 'login',
     path: '/login',
-    component: Login
+    component: ()=>import('@/pages/Login'),
   },
   {
     name: 'search',
     // path: '/search:keyword?',   // 占位符 
     path: '/search/:keyword?',   // 占位符 
-    component: Search,
+    component: ()=>import('@/pages/Search'),
+
     meta: {
       footShow: true
     },
@@ -115,7 +123,8 @@ export default [
   {
     name: 'register',
     path: '/register',
-    component: Register
+    component: ()=>import('@/pages/Register'),
+
   },
   {
     path: '*',

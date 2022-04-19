@@ -21,9 +21,13 @@ import Store from './vuex/sort.js'
 // 统一引入暴露所有的api接口
  import * as API from '@/api'
 Vue.config.productionTip = false //——关闭生产提示
-
-
-// Vue.use(router) // 使用路由
+import VueLazyload from 'vue-lazyload'
+import imglazy from '../public/images/banner1.jpg'
+Vue.use(VueLazyload,{ //懒加载配置参数
+      loading:imglazy   // 默认图片
+})
+// 引入表单验证插件
+import validate from '@/plugins/validate'
 new Vue({
   render: h => h(App),
   beforeCreate() {

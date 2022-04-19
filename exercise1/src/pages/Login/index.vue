@@ -79,8 +79,9 @@
         const {username,userpwd}  = this
         try {
       await this.$store.dispatch('user/login',{phone:username,password:userpwd})
-          // alert('登录请求成功，将要跳转首页')
-          this.$router.push('/home')
+          // alert('登录请求成功，将要跳转首页')  登录成功判断是否有query参数（跳转登录前点击的地址），有则跳query存的地址，没有则跳转首页
+          let topath = this.$route.query.redirect||'/home'
+          this.$router.push(topath)
         } catch (error) {
           alert(error.message)
           this.$router.push('/login')
